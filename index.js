@@ -17,12 +17,6 @@ client.on("ready", () => {
 })
 
 client.on("messageCreate", (message) => {
-    if (message.content == "Binkle"){
-        message.reply("Stinkle")
-    }
-
-
-
     if (message.content == "algorithm"){
         const channel = message.member.voice.channel
         if(!channel) return message.channel.send('algorithm test')
