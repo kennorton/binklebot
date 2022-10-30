@@ -31,7 +31,7 @@ client.on("messageCreate", (message) => {
         const connection = voiceDiscord.joinVoiceChannel({
             channelId: channel.id,
             guildId: message.guild.id,
-            adapterCreator: message.guild.adapterCreator,
+            adapterCreator: message.guild.voiceAdapterCreator,
         })
 
         player.play()
