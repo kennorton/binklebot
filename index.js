@@ -35,5 +35,3 @@ client.on("messageCreate", (message) => {
 })
 
 client.login(process.env.TOKEN) // Start bot with TOKEN variable stored in .env file
-
-//neegy neener
