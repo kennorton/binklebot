@@ -13,20 +13,21 @@ const client = new Discord.Client({
 })
 
 client.on("ready", () => {
-    console.log(`Logged in as $client.user.tag}`)
-    let guild = guild.channels
-    console.log(guild.name)
-    console.log(guild.channels)
-
-    for (let i = 1; i < length(guild); i++) {
-        console.log(channel)
-    }
+    
 
 })
 
 client.on("messageCreate", (message) => {
     if (message.content == "algorithm"){
-        const channel = message.member.voice.channel
+        console.log(`Logged in as $client.user.tag}`)
+        let guild = guild.channels
+        console.log(guild.name)
+        console.log(guild.channels)
+
+    for (let i = 1; i < length(guild); i++) {
+        console.log(guild.channels[i])
+    }
+        /*const channel = message.member.voice.channel
         if(!channel) return message.channel.send('algorithm test')
 
         const player = voiceDiscord.createAudioPlayer();
@@ -52,7 +53,7 @@ client.on("messageCreate", (message) => {
 
         player.on(voiceDiscord.AudioPlayerStatus.Idle, () => {
             connection.destroy()
-        })
+        })*/
     }
 })
 
