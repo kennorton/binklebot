@@ -19,6 +19,7 @@ client.on("ready", () => {
 client.on("messageCreate", (message) => {
     if (message.content == "Binkle"){
         message.reply("Stinkle")
+        console.log("Printed Stinkle")
     }
 
     if (message.content == "algorithm"){
@@ -33,10 +34,11 @@ client.on("messageCreate", (message) => {
             guildId: message.guild.id,
             adapterCreator: message.guild.voiceAdapterCreator,
         })
-
+        console.log("Made it to the play part")
         player.play()
         connection.subscribe(player)
 
+        console.log("Made it to the destroy part")
         player.on(voiceDiscord.AudioPlayerStatus.Idle, () => {
             connection.destroy()
         })
