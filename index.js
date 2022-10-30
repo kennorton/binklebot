@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const TOKEN = "MTAzNjM1MTkyNzIwNzg1ODM1Nw.GWH5Yz.jdCLEedPUAZs4hsCsBW5KkXHuKPsLLU5gldO2k" // Discord bot token (Make sure it's up to date.)
+require("dotenv").config()
 
 const client = new Discord.Client({
     intents: [
@@ -20,4 +20,4 @@ client.on("messageCreate", (message) => {
     }
 })
 
-client.login(TOKEN) // node index.js (Quit bot by pressing "ctrl c" + "Enter")
+client.login(process.env.TOKEN) // Start bot with TOKEN variable stored in .env file
