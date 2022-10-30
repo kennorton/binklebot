@@ -14,4 +14,4 @@ client.on("ready", () => {
     console.log(`Logged in as $client.user.tag}`)
 })
 
-client.login(TOKEN)
+client.login(TOKEN) // node index.js (Quit bot by pressing "ctrl c" + "Enter")
