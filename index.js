@@ -29,7 +29,7 @@ client.on("messageCreate", (message) => {
 
         const player = voiceDiscord.createAudioPlayer();
 
-        const resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
+        let resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
         switch (Math.floor(Math.random() * 2)) {
             case 0:
                 resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
