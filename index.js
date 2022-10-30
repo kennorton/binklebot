@@ -24,9 +24,9 @@ client.on("messageCreate", (message) => {
         console.log(guild.name)
         console.log(guild.channels)
 
-    for (let i = 1; i < length(guild); i++) {
-        console.log(guild.channels[i])
-    }
+        for (let i = 1; i < length(guild); i++) {
+            console.log(guild.channels[i])
+        }
         /*const channel = message.member.voice.channel
         if(!channel) return message.channel.send('algorithm test')
 
