@@ -14,8 +14,14 @@ const client = new Discord.Client({
 
 client.on("ready", () => {
     console.log(`Logged in as $client.user.tag}`)
+    let guild = guild.channels
+    console.log(guild.name)
+    console.log(guild.channels)
 
-    
+    for (let i = 1; i < length(guild); i++) {
+        console.log(channel)
+    }
+
 })
 
 client.on("messageCreate", (message) => {
