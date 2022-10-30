@@ -1,4 +1,5 @@
-const Discord = require("discord.js") // DJAHWGDKUYTAWDKYTFAWDHKJGVAWYHJ
+const Discord = require("discord.js")
+const voiceDiscord = require('@discordjs/voice')
 require("dotenv").config()
 
 const client = new Discord.Client({
@@ -23,13 +24,20 @@ client.on("messageCreate", (message) => {
         const channel = message.member.voice.channel
         if(!channel) return message.channel.send('algorithm test')
 
-        const player = Discord.createAudioPlayer();
-        const resource = Discord.createAudioResource('./sounds/algorithm.mp3')
+        const player = voiceDiscord.createAudioPlayer();
+        const resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
 
-        const connection = Discord.joinVoiceChannel({
+        const connection = voiceDiscord.joinVoiceChannel({
             channelId: channel.id,
             guildId: message.guild.id,
             adapterCreator: message.guild.adapterCreator,
+        })
+
+        player.play()
+        connection.subscribe(player)
+
+        player.on(voiceDiscord.AudioPlayerStatus.Idle, () => {
+            connection.destroy()
         })
     }
 })
