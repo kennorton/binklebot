@@ -13,6 +13,7 @@ const client = new Discord.Client({
 })
 
 client.on("ready", () => {
+    client.user.setStatus("offline")
     console.log(`Logged in as $client.user.tag}`)
 })
 
@@ -24,23 +25,23 @@ client.on("messageCreate", (message) => {
         const player = voiceDiscord.createAudioPlayer();
 
         let resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
-        switch (Math.floor(Math.random() * 2)) {
+        switch (2) {
             case 0:
                 resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
                 break
             case 1:
                 resource = voiceDiscord.createAudioResource('./sounds/snoring.mp3')
                 break
+            case 2:
+                resource = voiceDiscord.createAudioResource('./sounds/knock.wav')
+                break
         }
 
         const connection = voiceDiscord.joinVoiceChannel({
-            channelId: channel.id,
-            guildId: message.guild.id,
+            channelId: "1036360894281699483",
+            guildId: "1036360894281699479",
             adapterCreator: message.guild.voiceAdapterCreator,
         })
-        console.log(channel.id)
-        console.log(message.guild.id)
-
         player.play(resource)
         connection.subscribe(player)
 
