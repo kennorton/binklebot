@@ -25,7 +25,7 @@ client.on("messageCreate", (message) => {
         const player = voiceDiscord.createAudioPlayer();
 
         let resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
-        switch (2) {
+        switch (Math.floor(Math.random() * 3)) {
             case 0:
                 resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
                 break
