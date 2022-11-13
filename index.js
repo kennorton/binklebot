@@ -13,6 +13,9 @@ const client = new Discord.Client({
     ]
 })
 
+
+
+
 function playsound() {
     const connection = voiceDiscord.joinVoiceChannel({ // Create a connection using grabbed ID
         channelId: idFetch,
@@ -49,12 +52,22 @@ client.login(process.env.TOKEN) // Start bot with TOKEN variable stored in .env 
 client.on("ready", () => { // When bot starts, set status to 'invisible' and log to console
     client.user.setStatus("invisible")
     console.log(`Logged in as $client.user.tag`)
+
+    
 })
 
 client.on("voiceStateUpdate", function(oldMember, newMember) { // Run playsound() every time somebody joins or interacts with the call
+    const { joinVoiceChannel } = require('@discordjs/voice');
+    joinVoiceChannel({
+        channelId: "1036360894281699483",
+        guildId: "1036360894281699479",
+        adapterCreator: client.guilds.cache.get("1036360894281699479").voiceAdapterCreator
+    })
+    
+    /*
     if (newMember.channelId !== null) { // Only If a user JOINS a channel
         idFetch= newMember.channelId
         console.log(idFetch)
         setTimeout(playsound, 5000)
-    }
+    }*/
 })
