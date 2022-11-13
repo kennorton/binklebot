@@ -22,38 +22,58 @@ client.on("ready", () => { // When bot starts, set status to 'invisible' and log
     client.user.setStatus("invisible")
     console.log(`Logged in as $client.user.tag`)
     console.log("Hello");
-    setTimeout(() => { funnySound(); }, 5000);
+    setTimeout(() => { funnySound(); }, 2000);
 })
 
 
 
 function funnySound() {
-    // [ #==#==#==#==#==# Joins Call #==#==#==#==#==# ]
-    const { joinVoiceChannel } = require('@discordjs/voice');
-    const connection = joinVoiceChannel({
-        channelId: "1036360894281699483",
-        guildId: "1036360894281699479",
-        adapterCreator: client.guilds.cache.get("1036360894281699479").voiceAdapterCreator
-    })
+    // [ #==#==#==#==#==# Iterates Through All Members #==#==#==#==#==# ]
+    const list = client.guilds.cache.get("1036360894281699479");
+    list.members.cache.each(member => {
+        if (member.voice.channelId != null) {
+            if (Math.floor(Math.random() * 2) == 0) {
+                console.log(member.voice.channelId);
+                playSound(member.voice.channelId); // Add await functionality
+            }
+            else {
+                console.log("Unsuccessful roll");
+            }
+        }
+        else {
+            console.log("Member is not in a voice channel");
+        }
+    });
 
+    function playSound(channelToJoin) {
+        // [ #==#==#==#==#==# Joins Call #==#==#==#==#==# ]
+        const { joinVoiceChannel } = require('@discordjs/voice');
+        const connection = joinVoiceChannel({
+            channelId: "1036360894281699483",
+            guildId: "1036360894281699479",
+            adapterCreator: client.guilds.cache.get("1036360894281699479").voiceAdapterCreator
+        })
 
-    // [ #==#==#==#==#==# Sound Functionality #==#==#==#==#==# ]
-    const player = voiceDiscord.createAudioPlayer();
-    switch (Math.floor(Math.random() * 3)) { // Randomly select one of the files stored in ./sounds
-        case 0:
-            resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
-            break
-        case 1:
-            resource = voiceDiscord.createAudioResource('./sounds/snoring.mp3')
-            break
-        case 2:
-            resource = voiceDiscord.createAudioResource('./sounds/knock.wav')
-            break
+        // [ #==#==#==#==#==# Sound Functionality #==#==#==#==#==# ]
+        const player = voiceDiscord.createAudioPlayer();
+        switch (Math.floor(Math.random() * 3)) { // Randomly select one of the files stored in ./sounds
+            case 0:
+                resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
+                break
+            case 1:
+                resource = voiceDiscord.createAudioResource('./sounds/snoring.mp3')
+                break
+            case 2:
+                resource = voiceDiscord.createAudioResource('./sounds/knock.wav')
+                break
+        }
+
+        player.play(resource) // Play the selected randomly selected audio file
+        connection.subscribe(player) // Subscribe everyone to the player
+        player.on(voiceDiscord.AudioPlayerStatus.Idle, () => { // Leave the call once audio has been played
+            connection.destroy() 
+        })
+
+        return;
     }
-
-    player.play(resource) // Play the selected randomly selected audio file
-    connection.subscribe(player) // Subscribe everyone to the player
-    player.on(voiceDiscord.AudioPlayerStatus.Idle, () => { // Leave the call once audio has been played
-        connection.destroy() 
-        setTimeout(() => { funnySound(); }, 5000); })
 }
