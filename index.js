@@ -36,6 +36,7 @@ function funnySound() {
         adapterCreator: client.guilds.cache.get("1036360894281699479").voiceAdapterCreator
     })
 
+
     // [ #==#==#==#==#==# Sound Functionality #==#==#==#==#==# ]
     const player = voiceDiscord.createAudioPlayer();
     switch (Math.floor(Math.random() * 3)) { // Randomly select one of the files stored in ./sounds
