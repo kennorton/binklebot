@@ -15,16 +15,29 @@ const client = new Discord.Client({
 
 
 
+// START OF BOT CODE //
+client.login(process.env.TOKEN) // Start bot with TOKEN variable stored in .env file test
 
-function playsound() {
-    const connection = voiceDiscord.joinVoiceChannel({ // Create a connection using grabbed ID
-        channelId: idFetch,
+client.on("ready", () => { // When bot starts, set status to 'invisible' and log to console
+    client.user.setStatus("invisible")
+    console.log(`Logged in as $client.user.tag`)
+    console.log("Hello");
+    setTimeout(() => { funnySound(); }, 5000);
+})
+
+
+
+function funnySound() {
+    // [ #==#==#==#==#==# Joins Call #==#==#==#==#==# ]
+    const { joinVoiceChannel } = require('@discordjs/voice');
+    const connection = joinVoiceChannel({
+        channelId: "1036360894281699483",
         guildId: "1036360894281699479",
-        adapterCreator: idFetch.guild.voiceAdapterCreator,
-    });
+        adapterCreator: client.guilds.cache.get("1036360894281699479").voiceAdapterCreator
+    })
 
-    const player = voiceDiscord.createAudioPlayer(); // Create an audio player
-    
+    // [ #==#==#==#==#==# Sound Functionality #==#==#==#==#==# ]
+    const player = voiceDiscord.createAudioPlayer();
     switch (Math.floor(Math.random() * 3)) { // Randomly select one of the files stored in ./sounds
         case 0:
             resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
@@ -36,38 +49,10 @@ function playsound() {
             resource = voiceDiscord.createAudioResource('./sounds/knock.wav')
             break
     }
-    
+
     player.play(resource) // Play the selected randomly selected audio file
     connection.subscribe(player) // Subscribe everyone to the player
     player.on(voiceDiscord.AudioPlayerStatus.Idle, () => { // Leave the call once audio has been played
-        connection.destroy()
-
-    
-    })
+        connection.destroy() 
+        setTimeout(() => { funnySound(); }, 5000); })
 }
-
-// START OF BOT CODE //
-client.login(process.env.TOKEN) // Start bot with TOKEN variable stored in .env file test
-
-client.on("ready", () => { // When bot starts, set status to 'invisible' and log to console
-    client.user.setStatus("invisible")
-    console.log(`Logged in as $client.user.tag`)
-
-    
-})
-
-client.on("voiceStateUpdate", function(oldMember, newMember) { // Run playsound() every time somebody joins or interacts with the call
-    const { joinVoiceChannel } = require('@discordjs/voice');
-    joinVoiceChannel({
-        channelId: "1036360894281699483",
-        guildId: "1036360894281699479",
-        adapterCreator: client.guilds.cache.get("1036360894281699479").voiceAdapterCreator
-    })
-    
-    /*
-    if (newMember.channelId !== null) { // Only If a user JOINS a channel
-        idFetch= newMember.channelId
-        console.log(idFetch)
-        setTimeout(playsound, 5000)
-    }*/
-})
