@@ -17,7 +17,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-myGuildID = "1036360894281699479";
+myGuildID = "794443094518005780";
 
 
 // START OF BOT CODE //
@@ -44,7 +44,7 @@ async function memberLoop() {
         // Member loop
         list.members.cache.each(member => {
             if (member.voice.channelId != null && loopFlag == false) {
-                if (Math.floor(Math.random() * 20) == 0) {
+                if (Math.floor(Math.random() * 2) == 0) {
                     console.log(member.voice.channelId);
                     playSound(member.voice.channelId);
                     console.log("Called playsound");
