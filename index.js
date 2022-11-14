@@ -76,7 +76,7 @@ function playSound(channelToJoin) {
     const player = voiceDiscord.createAudioPlayer();
     switch (Math.floor(Math.random() * 3)) { // Randomly select one of the files stored in ./sounds
         case 0:
-            resource = voiceDiscord.createAudioResource('./sounds/algorithm.mp3')
+            resource = voiceDiscord.createAudioResource('./sounds/algorithm.wav')
             break
         case 1:
             resource = voiceDiscord.createAudioResource('./sounds/snoring.mp3')
